@@ -5,7 +5,7 @@ Source code and data for "Improving Anticancer Peptide Prediction via A Semi-Sup
 
 # Requirements
 * Python >= 3.10
-* PyTorch >= 2.2
+* PyTorch >= 2.6
 * fair-esm >= 1.1
 
 
@@ -14,4 +14,4 @@ Source code and data for "Improving Anticancer Peptide Prediction via A Semi-Sup
 * Next, the following scenarios can be tested:
 * python Main.py \<parameters\>  #---Binary classification task with 5-fold CV
 
-* "Data/EV.csv" is the dataset used for external validation.
+* "Data/EV.csv" is the dataset used for external validation, and "Data/EV_predictions.csv" is the prediction results of external validation set.
