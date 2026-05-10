@@ -51,10 +51,7 @@ ind_loader = DataLoader(ind_set, batch_size=128, shuffle=False)
 
 for k, (tr_idx, va_idx) in enumerate(kf.split(X_df, Y_df), start=1):
     print(f"\n===== Fold {k}/5 =====")
-    
-    # === 每个 fold 重新固定随机种子（关键稳定措施）===
     seed_everything(rd + k)
-    
     tr_df = CV.iloc[tr_idx]
     va_df = CV.iloc[va_idx]
 
@@ -63,7 +60,6 @@ for k, (tr_idx, va_idx) in enumerate(kf.split(X_df, Y_df), start=1):
     tr_loader = DataLoader(train_set, batch_size=128, shuffle=True)
     va_loader = DataLoader(val_set, batch_size=128, shuffle=False)
     
-    # === 模型改小一点 + dropout 提高（防止过拟合）===
     model_T = MLP(seq_feat.shape[1], hidden=(512,128,32), p_drop=0.2)
     teacher_save = os.path.join('Results', f'fold{k}_teacher.pt')
     
