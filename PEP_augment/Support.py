@@ -54,7 +54,7 @@ def lcs_with_indices(a: str, b: str):
     return "".join(out), idxs
 
 # ---- Augmentation ----
-PRESERVE = set(list("KRHLG"))
+PRESERVE = set(list("KRHLGP"))
 
 def top_n_neighbors(i, seqs, n):
     base = seqs[i]
