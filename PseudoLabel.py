@@ -7,7 +7,7 @@ from Utils import evaluate_clf
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# ====================== Mean Teacher 主训练函数（稳定性优化） ======================
+# ====================== Mean Teacher ======================
 def mean_teacher_train(model, train_loader, val_loader, epochs=300, lr=1e-4, 
                        alpha=0.995, patience=30, save_path=None):
     student = model.to(device)
