@@ -9,32 +9,30 @@ from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_sco
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def datacompile(path, neg_fold, seed=42):
-    # 读取pos_label.csv
+    # load pos_label.csv
     path = "./Data/"
     pos_df = pd.read_csv(path + 'pos_label.csv')
     pos_ids = pos_df['Peptides'].tolist()
     pos_sequences = pos_df['Sequence'].tolist()
-    # 读取neg_label.csv
+    # load neg_label.csv
     neg_df = pd.read_csv(path + 'neg_label.csv')
     neg_ids = neg_df['Peptides'].tolist()
     neg_sequences = neg_df['Sequence'].tolist()
     
     len_pos = len(pos_sequences)
     random.seed(seed)
-    # 创建负样本的ID和Sequence对
+    # Create ID and Sequence pairs for negative samples
     neg_pairs = list(zip(neg_ids, neg_sequences))
     neg_sampled_pairs = random.sample(neg_pairs, min(neg_fold * len_pos, len(neg_pairs)))
     neg_sampled_ids, neg_sampled_sequences = zip(*neg_sampled_pairs)
-    # 创建数据集
     data = []
     for pid, seq in zip(pos_ids, pos_sequences):
         data.append({'Peptide': pid, 'Sequence': seq, 'Label': 1})
     for pid, seq in zip(neg_sampled_ids, neg_sampled_sequences):
         data.append({'Peptide': pid, 'Sequence': seq, 'Label': 0})
-    # 转换为DataFrame并打乱
     dataset_df = pd.DataFrame(data)
     dataset_df = dataset_df.sample(frac=1, random_state=seed).reset_index(drop=True)
-    # 设置Peptide作为index
+    
     dataset_df = dataset_df.set_index('Peptide')
      
     return dataset_df
