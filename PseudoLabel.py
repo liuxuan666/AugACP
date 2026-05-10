@@ -30,7 +30,7 @@ def mean_teacher_train(model, train_loader, val_loader, epochs=300, lr=1e-4,
             loss.backward()
             opt.step()
 
-            # EMA 更新 teacher
+            # EMA updates teacher
             with torch.no_grad():
                 for t_param, s_param in zip(teacher.parameters(), student.parameters()):
                     t_param.data.mul_(alpha).add_((1 - alpha) * s_param.data)
