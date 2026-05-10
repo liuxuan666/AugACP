@@ -172,18 +172,16 @@ def predict_pdbs_fast_no_msa(csv_path: str,
             "--num-models", "1",
             "--num-recycle", "3",
             "--stop-at-score", "0.75",
-            # "--disable-amber",  # 若不需要Relax可解开进一步加速
+            # "--disable-amber", 
         ]
         print("[StructPred] run:\n ", " ".join(cmd))
         env = os.environ.copy()
         env["MPLBACKEND"] = "Agg"
         subprocess.run(cmd, check=True, env=env)
 
-        # 仅保留 .pdb：从 tmp_out 递归查找并复制到目标目录
         kept = 0
         for p in tmp_out.rglob("*.pdb"):
             target = outp / p.name
-            # 若你希望强制用表格ID命名，可在此处重命名；否则保持 colabfold 的 ranked 命名
             shutil.copy2(p, target)
             kept += 1
 
