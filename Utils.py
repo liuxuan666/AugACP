@@ -14,8 +14,8 @@ def datacompile(path, neg_fold, seed=42):
     pos_df = pd.read_csv(path + 'pos_label.csv')
     pos_ids = pos_df['Peptides'].tolist()
     pos_sequences = pos_df['Sequence'].tolist()
-    # load neg_label.csv
-    neg_df = pd.read_csv(path + 'neg_label.csv')
+    # sample negative samples from unknown_label.csv
+    neg_df = pd.read_csv(path + 'unknown_label.csv')
     neg_ids = neg_df['Peptides'].tolist()
     neg_sequences = neg_df['Sequence'].tolist()
     
