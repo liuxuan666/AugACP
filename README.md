@@ -14,5 +14,3 @@ Source code and data for "Improving Anticancer Peptide Prediction via A Semi-Sup
 
 * Next, the following scenarios can be tested:
 * python Main.py \<parameters\>  #---Binary classification task with 5-fold CV
-
-* "Data/EV.csv" is the dataset used for external validation, and "Data/EV_predictions.csv" is the prediction results of the external validation set.
